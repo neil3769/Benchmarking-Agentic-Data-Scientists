@@ -25,8 +25,10 @@ os.environ["HUGGINGFACE_HUB_CACHE"] = os.environ["HF_HOME"]
 # =========================
 # API CONFIG (UPDATED)
 # =========================
-os.environ["OPENAI_BASE_URL"] = "https://openwebui.uni-freiburg.de/api/v1"
-os.environ["OPENAI_API_KEY"] = "sk-494ce4dab1034d1e8965f07c445be4c8"   # <-- replace if needed
+# Read the endpoint and key from the environment (e.g. a local .env); never hard-code keys.
+os.environ.setdefault("OPENAI_BASE_URL", "https://openwebui.uni-freiburg.de/api/v1")
+if not os.environ.get("OPENAI_API_KEY"):
+    sys.exit("OPENAI_API_KEY is not set. Export it or add it to .env before running.")
 
 # =========================
 # GPU stability

@@ -62,10 +62,13 @@ metrics.json
 third_party/agentk/outputs/
 log/
 third_party/mle_star/machine_learning_engineering/tasks/
-third_party/ml_zero/run_pipeline.sh
-third_party/ml_zero/*.slurm
-third_party/ml_zero/src/autogluon/assistant/tools_registry/indices/*
+third_party/mlzero/run_pipeline.sh
+third_party/mlzero/*.slurm
+third_party/mlzero/src/autogluon/assistant/tools_registry/indices/*
 logs
 aide_logs/
 job.slurm
 llm_requirements.txt
+
+# Secrets: keep real credentials out of git (template: .env.example)
+.env

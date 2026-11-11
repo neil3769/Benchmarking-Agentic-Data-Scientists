@@ -1,0 +1,134 @@
+Task and Metric Descriptions Provided to Agents
+===============================================
+
+Binary Classification Task Description
+--------------------------------------
+
+Classification Task
+
+Given a tabular dataset with mixed categorical and continuous input features, the task is to predict a discrete class label for unseen samples.
+
+A model is trained on the labeled training data (train.csv), where each sample is associated with a class label, and then used to generate class predictions for the unlabeled test data (test.csv).
+The output must consist of predicted probabilities for the positive class for each test sample.
+
+The task requires learning non-linear decision boundaries and feature interactions across heterogeneous feature types while maintaining good generalization performance across all classes.
+
+Depending on the evaluation metric, models may also need to produce calibrated class probabilities, but only the final predicted label is used for scoring.
+
+Accurate ranking of samples by predicted probability is critical for performance.
+
+Models that produce poor probability estimates or collapse predictions toward 0.5 will perform poorly.
+
+
+Multiclass Classification Task Description
+------------------------------------------
+
+Multi-Class Classification Task
+
+Given a tabular dataset with mixed categorical and continuous input features, the task is to predict a discrete class label for unseen samples.
+
+A model is trained on the labeled training data (train.csv), where each sample is associated with a class label, and then used to generate class predictions for the unlabeled test data (test.csv).
+The output must consist of predicted probabilities for all possible target classes for each test sample.
+
+The task requires learning non-linear decision boundaries and feature interactions across heterogeneous feature types while maintaining good generalization performance across all classes.
+
+To align with the multi-class evaluation metric, models need to produce well-calibrated class probabilities for all target classes rather than just a final predicted label.
+
+Accurate ranking of samples by predicted probability is critical for performance.
+
+Models that produce poor probability estimates or uniform distribution predictions across classes will perform poorly.
+
+
+Regression Task Description
+---------------------------
+
+Regression Task
+
+Given a tabular dataset with mixed categorical and continuous input features, the task is to predict a continuous target variable for unseen samples.
+
+A model is trained on the labeled training data (train.csv) and then used to generate target predictions for the unlabeled test data (test.csv). The output must consist of one predicted target value per test sample.
+
+The task requires learning non-linear relationships and feature interactions across heterogeneous feature types while maintaining good generalization performance.
+
+The model should aim to explain as much variance in the target as possible (high R²), while also maintaining low prediction error (low RMSE). Capturing meaningful non-linear relationships without producing large outlier errors is critical for strong performance.
+
+Capturing non-linear relationships and feature interactions is critical for strong performance.
+
+Models that achieve high R² by producing unstable or extreme predictions will be penalized due to increased RMSE.
+
+
+ROC-AUC Metric Description
+--------------------------
+
+ROC-AUC Metric
+
+The competition is evaluated using ROC-AUC (Area Under the Receiver Operating Characteristic Curve).
+
+ROC-AUC measures the ability of the model to correctly rank positive samples higher than negative samples.
+
+Key properties:
+
+- ROC-AUC evaluates ranking quality, not classification accuracy.
+- AUC = 1 indicates perfect ranking.
+- AUC = 0.5 indicates random predictions.
+- It is insensitive to classification thresholds.
+
+In this task:
+
+- A higher ROC-AUC indicates a better model.
+- Models must output well-calibrated probabilities for the positive class.
+- The primary goal is to maximize ROC-AUC on unseen data.
+- Models should focus on ranking positive samples above negative ones rather than just predicting correct labels.
+
+
+Multi-Class ROC-AUC Metric Description
+--------------------------------------
+
+Multi-Class ROC-AUC Metric
+
+The competition is evaluated using multi-class ROC-AUC (Area Under the Receiver Operating Characteristic Curve), typically calculated via a macro-averaged One-vs-One (OvO) approach.
+
+ROC-AUC measures the ability of the model to correctly rank samples of a specific true class higher than samples of other classes.
+
+Key properties:
+
+- ROC-AUC evaluates ranking quality, not classification accuracy.
+- AUC = 1 indicates perfect ranking.
+- AUC = 0.5 indicates random predictions.
+- It is insensitive to classification thresholds.
+
+In this task:
+
+- A higher ROC-AUC indicates a better model.
+- Models must output well-calibrated probabilities for each of the possible classes.
+- The primary goal is to maximize ROC-AUC on unseen data.
+- Models should focus on correctly ranking the probabilities across all target classes rather than just predicting the single correct label.
+
+
+Regression Metric Description
+-----------------------------
+
+Regression Metrics
+
+The model is primarily evaluated using R² (coefficient of determination), with Root Mean Squared Error (RMSE) used as a secondary metric.
+
+    R² = 1 - (Σ (y_i - ŷ_i)²) / (Σ (y_i - ȳ)²)
+
+    RMSE = sqrt(1/n Σ (y_i - ŷ_i)²)
+
+Key properties:
+
+- R² measures how well the model explains variance in the target.
+- R² = 1 indicates perfect predictions.
+- R² = 0 indicates performance equal to predicting the mean.
+- R² < 0 indicates poor generalization.
+- RMSE measures the magnitude of prediction error.
+- RMSE penalizes large errors more strongly than small ones.
+- RMSE is in the same units as the target variable.
+
+In this task:
+
+- The primary goal is to maximize R² on unseen data.
+- RMSE should be minimized as a secondary objective.
+- Models should capture variance effectively while avoiding large prediction errors.
+- Overly aggressive models that inflate variance but produce large errors will perform poorly under RMSE.

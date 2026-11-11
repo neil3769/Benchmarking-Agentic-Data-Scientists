@@ -36,7 +36,7 @@ def main():
         "mlzero",
         "-i", args.input_dir,
         "-o", str(output_dir),
-        "-c", "third_party/ml_zero/src/autogluon/assistant/configs/mllab_test.yaml",
+        "-c", "third_party/mlzero/src/autogluon/assistant/configs/mllab_test.yaml",
         "-n", str(args.max_iterations),
         "--initial-instruction",
         (

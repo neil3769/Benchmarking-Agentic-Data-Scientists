@@ -192,7 +192,7 @@ bio = [
 
 # --- Tool Configurations ---
 [tool.setuptools.packages.find]
-where = ["third_party/ml_zero/src"]
+where = ["third_party/mlzero/src"]
 include = ["autogluon.assistant*", "autogluon.mcp*"]
 namespaces = true
 

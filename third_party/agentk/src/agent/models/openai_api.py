@@ -158,7 +158,7 @@ class OpenAIAPILanguageBackend(LanguageBackend):
         # self.base_url = os.getenv("OPENAI_BASE_URL", "http://releagpu01.tf.ki.privat:8010/v1")
         # self.base_url = os.getenv("OPENAI_BASE_URL", "http://localhost:8000/v1")
         self.base_url = os.getenv("OPENAI_BASE_URL", "https://openwebui.uni-freiburg.de/api")
-        self.api_key = os.getenv("OPENAI_API_KEY", "sk-494ce4dab1034d1e8965f07c445be4c8")
+        self.api_key = os.getenv("OPENAI_API_KEY")
 
         # DEBUGGING CODE
         # print("OpenAIAPILanguageBackend INIT CALLED")
