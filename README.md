@@ -6,10 +6,8 @@ University of Freiburg · ELLIS Institute Tübingen · Zuse School ELIZA · Prio
 
 *AutoAI-FM Workshop at IJCAI-ECAI 2026 (oral + poster)*
 
-[📄 Paper (PDF)](paper/Towards_Benchmarking_Agentic_Data_Scientists.pdf) · [Official code repository](https://github.com/KARTIK-N-NAYAK/Benchmarking-Agentic-Data-Scientists)
+[📄 Paper (PDF)](paper/Towards_Benchmarking_Agentic_Data_Scientists.pdf)
 <!-- TODO: add the online paper link (arXiv / OpenReview / workshop page) next to the PDF link -->
-
-> This is my copy of the official repository cited in the paper. I'm an equal-contribution co-author; see [My contributions](#my-contributions).
 
 ---
 
@@ -71,10 +69,10 @@ The task, metric, and dataset descriptions each agent received are in [`descript
 
 ### Protocol
 
-- **Execution engine.** For every run, the engine places the fold's `train.csv` / `test.csv` at a fixed location and starts the agent with the task description. It then collects the prediction file. A run is **valid** only if that file parses and contains a prediction for every test row. Anything else counts as a failure. There are no automatic retries.
-- **Backbone LLM.** Every agent used `gpt-oss-120b`, served behind an OpenAI-compatible endpoint. Decoding settings were each system's own defaults.
-- **Hardware.** Each run was one SLURM job with 8 CPU cores and one NVIDIA RTX 2080 Ti. Compute nodes could reach only the model endpoint, with no other internet access.
-- **Time budgets.**
+- **Execution engine** - For every run, the engine places the fold's `train.csv` / `test.csv` at a fixed location and starts the agent with the task description. It then collects the prediction file. A run is **valid** only if that file parses and contains a prediction for every test row. Anything else counts as a failure. There are no automatic retries.
+- **Backbone LLM** - Every agent used `gpt-oss-120b`, served behind an OpenAI-compatible endpoint. Decoding settings were each system's own defaults.
+- **Hardware** - Each run was one SLURM job with 8 CPU cores and one NVIDIA RTX 2080 Ti. Compute nodes could reach only the model endpoint, with no other internet access.
+- **Time budgets**
 
   | System | Budget per run |
   |---|---|
@@ -82,7 +80,7 @@ The task, metric, and dataset descriptions each agent received are in [`descript
   | AgentK | capped at 14,400 s (internal budget: 18,000 s total, 600 s per submission) |
   | AIDE, MLE-STAR, MLZero | 24 h |
 
-- **Leakage audit.** We checked every fold of the 12 datasets for five things:
+- **Leakage audit** - We checked every fold of the 12 datasets for five things:
   - the target column present in the test file
   - the target reconstructible from a single feature or from an additive pair of features
   - schema mismatches between train and test
@@ -231,21 +229,19 @@ These scripts align rows by an `id` column when one exists and infer the target 
 
 ## Limitations
 
-- **Small suite.** With 10 datasets and 3 folds each, variance estimates are rough.
-- **Unequal settings.** Time budgets and decoding settings differ between systems on purpose (see the paper, Section 3.6). That weakens any claim of a strictly equal comparison.
-- **MLE-STAR is the reimplementation.** Results are for the open-source version, which uses DuckDuckGo instead of Google Search. They are not results for MLE-STAR as published.
-- **Backbone mismatch.** None of the agents was designed or tuned for `gpt-oss-120b`. Some of the failures we saw probably reflect that mismatch rather than the systems themselves.
-- **Tabular only.** Several of these systems also handle image, text, or audio tasks. This benchmark does not test those.
+- **MLE-STAR is the reimplementation** - Results are for the open-source version, which uses DuckDuckGo instead of Google Search. They are not results for MLE-STAR as published.
+- **Backbone mismatch** - None of the agents was designed or tuned for `gpt-oss-120b`. Some of the failures we saw probably reflect that mismatch rather than the systems themselves.
+- **Tabular only** - Several of these systems also handle image, text, or audio tasks. This benchmark does not test those.
 
 ## My contributions
 
 I'm one of three equal-contribution first authors. My work on this project:
 
-- **AgentK.** Integrated AgentK into the benchmark, served it with `gpt-oss-120b`, and ran it on the cluster.
-- **AutoGluon baseline.** Wrote the AutoGluon runners for classification and regression.
-- **Evaluation.** Wrote the per-fold metric scripts.
-- **Paper.** Edited the paper.
-- **Repository.** Did the final setup of the public repository, including the agent descriptions.
+- **AgentK** - Integrated AgentK into the benchmark, served it with `gpt-oss-120b`, and ran it on the cluster.
+- **AutoGluon baseline** - Wrote the AutoGluon runners for classification and regression.
+- **Evaluation** - Wrote the per-fold metric scripts.
+- **Paper** - Edited the paper.
+- **Repository** - Did the final setup of the public repository, including the agent descriptions.
 
 ## Citation
 
@@ -258,16 +254,3 @@ I'm one of three equal-contribution first authors. My work on this project:
   year      = {2026}
 }
 ```
-
-## Acknowledgements and third-party code
-
-The agent implementations under `third_party/` are the work of their original authors and are covered by their own licences. They are bundled here with modifications for running under a shared protocol.
-
-| Code | Upstream | Licence |
-|---|---|---|
-| AIDE | [WecoAI/aideml](https://github.com/WecoAI/aideml) | MIT |
-| AutoGluon Assistant / MLZero | [autogluon/autogluon-assistant](https://github.com/autogluon/autogluon-assistant) | Apache-2.0 |
-| MLE-STAR-Open | [WalkingDevFlag/MLE-STAR-Open](https://github.com/WalkingDevFlag/MLE-STAR-Open) | see upstream |
-| AgentK | Huawei Agent K team (Grosnit et al., 2025) | see upstream |
-
-Funding acknowledgements are listed in the paper.
