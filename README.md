@@ -15,10 +15,10 @@ University of Freiburg · ELLIS Institute Tübingen · Zuse School ELIZA · Prio
 
 Agentic ML systems use an LLM to write, run, and fix their own machine-learning pipelines. We put four of them (**AgentK, AIDE, MLE-STAR, MLZero**) and the AutoML baseline **AutoGluon** under a single protocol on 10 tabular datasets. All five systems used the same splits, the same metrics, and the same backbone LLM, and we measured both predictive performance and whether each system produced a valid result at all.
 
-- **AutoGluon ranked first overall and never failed.** It was also the cheapest system to run, because it uses no LLM tokens.
-- **The agents can win individual datasets but are often unreliable.** Out of 30 runs each, MLZero failed 15, AgentK 11, AIDE 5 and MLE-STAR 0.
-- **Taking reliability into account changes the ranking.** On mean performance alone, MLZero moves from 5th to 2nd. Several of its best scores come from datasets where only one of three folds finished.
-- **Two of the 12 curated datasets leaked the target into the test files** (Bike Sharing Demand, Bioresponse). The agents that read the raw data exploited the leak, so we removed those datasets after a per-fold audit.
+- **AutoGluon ranked first overall and never failed** - It was also the cheapest system to run, because it uses no LLM tokens.
+- **The agents can win individual datasets but are often unreliable** - Out of 30 runs each, MLZero failed 15, AgentK 11, AIDE 5 and MLE-STAR 0.
+- **Taking reliability into account changes the ranking** - On mean performance alone, MLZero moves from 5th to 2nd. Several of its best scores come from datasets where only one of three folds finished.
+- **Two of the 12 curated datasets leaked the target into the test files** - Bike Sharing Demand and Bioresponse. The agents that read the raw data exploited the leak, so we removed those datasets after a per-fold audit.
 
 ## Results
 
